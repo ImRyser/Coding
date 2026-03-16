@@ -6,7 +6,7 @@ def quit():
 
 def entry_print():
     Label(main_window,text= entry_full_name.get()).grid(column=0,row=6,sticky=E)
-    Label(main_window,text=entry_Receipt_number.get()).grid(column=1,row=6)
+    Label(main_window,text=entry_receipt_number.get()).grid(column=1,row=6)
     Label(main_window,text=entry_item_hired.get()).grid(column=2,row=6)
     Label(main_window,text=entry_number_hired.get()).grid(column=3,row=6)
 
@@ -16,8 +16,8 @@ def generate_random():
     Label(main_window,text=random_number).grid(column=0,row=2, sticky=E)
 
 def main():
-    Button(main_window, text="Quit",command= quit) .grid(column=0,row=1)
-    Button(main_window, text="Print",command=entry_print).grid(column=1,row=1)
+    Button(main_window, text="Quit",command= quit) .grid(column=5,row=1)
+    Button(main_window, text="Print",command=entry_print).grid(column=4,row=1)
     Label(main_window,text="Customer Name").grid(column=0,row=2)
     Label(main_window,text="Receipt Number").grid(column=0,row=3)
     Label(main_window,text="Item Hired").grid(column=0,row=4)
@@ -27,5 +27,10 @@ def main():
 main_window =Tk()
 entry_full_name= Entry(main_window)
 entry_full_name.grid(column=2,row=2,padx=10,pady=5)
-
+entry_receipt_number = Entry(main_window)
+entry_receipt_number.grid(column=2,row=3,padx=10,pady=5)
+entry_item_hired = Entry(main_window)
+entry_item_hired.grid(column=2,row=4,padx=10,pady=5)
+entry_number_hired = Entry(main_window)
+entry_number_hired.grid(column=2,row=5,padx=10,pady=5)
 main()

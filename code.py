@@ -32,12 +32,15 @@ def main():
     Label(main_window,font='bold',text="Receipt Number").grid(column=2,row=6)
     Label(main_window,font='bold',text="Hire Item").grid(column=3,row=6,padx=10)
     Label(main_window,font='bold',text="Number Hired").grid(column=4,row=6,padx=15)
+    Label(main_window,text="Row #").grid(column=4,row=2)
     main_window.mainloop()
 
 number ={'total_entries':0}
 j_names=[]
 
 main_window =Tk()
+entry_row = Entry(main_window)
+entry_row.grid(column=5,row=2)
 entry_full_name = Entry(main_window)
 entry_full_name.grid(column=2,row=2,padx=10,pady=5)
 entry_receipt_number = Entry(main_window)

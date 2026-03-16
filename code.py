@@ -1,28 +1,46 @@
+#used to open application
 from tkinter import*
 import random
 
+#used to create a "quit" button
 def quit():
     main_window.destroy
 
+#used to create a "print" button
 def entry_print():
+    name_count = 0
     Label(main_window,text= entry_full_name.get()).grid(column=1,row=7,sticky=E)
     Label(main_window,text=entry_receipt_number.get()).grid(column=2,row=7)
     Label(main_window,text=entry_item_hired.get()).grid(column=3,row=7)
     Label(main_window,text=entry_number_hired.get()).grid(column=4,row=7)
+    ROWS_ABOVE = 7
+    while name_count < counters['total_entries']:
+        Label(main_window, text=name_count).grid(column=0,row=name_count+7)
+        Label(main_window, text=(j_names[name_count][0])).grid(column=1,row=name_count+ROWS_ABOVE)
+        Label(main_window, text=(j_names[name_count][1])).grid(column=2,row=name_count+ROWS_ABOVE)
+        Label(main_window, text=(j_names[name_count][1])).grid(column=2,row=name_count+ROWS_ABOVE)
+        name_count +=1
 
+#used to create a "append" button
 def append_name ():
-    if len(entry_full_name.get()) != 0 :
-        j_names.append(entry_full_name.get())
-        number['total_entries'] += 1
+    j_names.append([entry_full_name.get(),entry_receipt_number.get(),entry_item_hired.get(),entry_number_hired.get()])
+    entry_full_name.delete(0,'end')
+    entry_receipt_number.delete(0,'end')
+    entry_item_hired.delete(0,'end')
+    counters['total_entries'] +=1
 
+
+#used to give random ticket number
 def generate_random():
     random_number = random.randint(1,10)
     Label(main_window,text=random_number).grid(column=0,row=2, sticky=E)
 
+#puts buttons and titles on main window
 def main():
     Button(main_window, text="Append Details",command=append_name).grid(column=3,row=1)
     Button(main_window, text="Quit",command= quit) .grid(column=5,row=1)
     Button(main_window, text="Print Details",command=entry_print).grid(column=4,row=1)
+    Button(main_window, text="Delete Row",).grid(column=6,row=2)
     Label(main_window,text="Customer Name").grid(column=0,row=2)
     Label(main_window,text="Receipt Number").grid(column=0,row=3)
     Label(main_window,text="Item Hired").grid(column=0,row=4)
@@ -32,15 +50,16 @@ def main():
     Label(main_window,font='bold',text="Receipt Number").grid(column=2,row=6)
     Label(main_window,font='bold',text="Hire Item").grid(column=3,row=6,padx=10)
     Label(main_window,font='bold',text="Number Hired").grid(column=4,row=6,padx=15)
-    Label(main_window,text="Row #").grid(column=4,row=2)
+    Label(main_window,text="Row #").grid(column=4,row=2,padx=5)
     main_window.mainloop()
 
-number ={'total_entries':0}
-j_names=[]
 
+j_names=[]
+counters ={'total_entries':0}
+#puts typable entries
 main_window =Tk()
 entry_row = Entry(main_window)
-entry_row.grid(column=5,row=2)
+entry_row.grid(column=5,row=2,padx=15,pady=5)
 entry_full_name = Entry(main_window)
 entry_full_name.grid(column=2,row=2,padx=10,pady=5)
 entry_receipt_number = Entry(main_window)

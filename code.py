@@ -9,11 +9,10 @@ def entry_print():
     Label(main_window,text=entry_receipt_number.get()).grid(column=2,row=7)
     Label(main_window,text=entry_item_hired.get()).grid(column=3,row=7)
     Label(main_window,text=entry_number_hired.get()).grid(column=4,row=7)
-    Label(main_window,text="0"),grid(column=0,row=7)
 
 def append_name ():
-    if len(entry_name.get()) != 0 :
-        j_names.append(entry_name.get())
+    if len(entry_full_name.get()) != 0 :
+        j_names.append(entry_full_name.get())
         number['total_entries'] += 1
 
 def generate_random():
@@ -35,8 +34,11 @@ def main():
     Label(main_window,font='bold',text="Number Hired").grid(column=4,row=6,padx=15)
     main_window.mainloop()
 
+number ={'total_entries':0}
+j_names=[]
+
 main_window =Tk()
-entry_full_name= Entry(main_window)
+entry_full_name = Entry(main_window)
 entry_full_name.grid(column=2,row=2,padx=10,pady=5)
 entry_receipt_number = Entry(main_window)
 entry_receipt_number.grid(column=2,row=3,padx=10,pady=5)
@@ -44,4 +46,5 @@ entry_item_hired = Entry(main_window)
 entry_item_hired.grid(column=2,row=4,padx=10,pady=5)
 entry_number_hired = Entry(main_window)
 entry_number_hired.grid(column=2,row=5,padx=10,pady=5)
+
 main()

@@ -13,6 +13,9 @@ def entry_print():
     Label(main_window,text=entry_receipt_number.get()).grid(column=2,row=7)
     Label(main_window,text=entry_item_hired.get()).grid(column=3,row=7)
     Label(main_window,text=entry_number_hired.get()).grid(column=4,row=7)
+    #used to give "Row #" number
+    Label(main_window,text="1").grid()
+
     ROWS_ABOVE = 7
     while name_count < counters['total_entries']:
         Label(main_window, text=name_count).grid(column=0,row=name_count+7)
@@ -27,15 +30,16 @@ def append_name ():
     entry_full_name.delete(0,'end')
     entry_receipt_number.delete(0,'end')
     entry_item_hired.delete(0,'end')
+    entry_number_hired.delete(0,'end')
     counters['total_entries'] +=1
 
 
-#used to give random ticket number
+#used to give random receipt number
 def generate_random():
     random_number = random.randint(1,10)
     Label(main_window,text=random_number).grid(column=0,row=2, sticky=E)
 
-#puts buttons and titles on main window
+#adds buttons and titles to the main window
 def main():
     Button(main_window, text="Append Details",command=append_name).grid(column=3,row=1)
     Button(main_window, text="Quit",command= quit) .grid(column=5,row=1)
@@ -56,6 +60,7 @@ def main():
 
 j_names=[]
 counters ={'total_entries':0}
+
 #puts typable entries
 main_window =Tk()
 entry_row = Entry(main_window)

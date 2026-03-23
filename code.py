@@ -7,47 +7,42 @@ def quit():
 
 # used to create a "print" button
 def entry_print():
-    global hire_details, total_entries
-    # clear previous labels for the display
-    for widget in main_window.grid_slaves():
-        if int(widget.grid_info()["row"]) >= 8:
-            widget.destroy()
-    
-    # display all hire details
-    for i in range(total_entries):
-        Label(main_window, text=str(i)).grid(column=0, row=i+8)
-        Label(main_window, text=hire_details[i][0]).grid(column=1, row=i+8)
-        Label(main_window, text=hire_details[i][1]).grid(column=2, row=i+8)
-        Label(main_window, text=hire_details[i][2]).grid(column=3, row=i+8)
-        Label(main_window, text=hire_details[i][3]).grid(column=4, row=i+8)
+    name_count = 0
+    # table headers
+    Label(main_window, font='bold', text="Row").grid(column=0, row=7)
+    Label(main_window, font='bold', text="Customer Name").grid(column=1, row=7)
+    Label(main_window, font='bold', text="Receipt Number").grid(column=2, row=7)
+    Label(main_window, font='bold', text="Item Hired").grid(column=3, row=7, padx=10)
+    Label(main_window, font='bold', text="Number Hired").grid(column=4, row=7, padx=15)
+    ROWS_ABOVE = 7
+    while name_count < counters['total_entries'] :
+        Label(main_window, text=name_count).grid(column=0,row=name_count+ROWS_ABOVE+1)
+        Label(main_window, text=(j_names[name_count][0])).grid(column=1,row=name_count+ROWS_ABOVE+1)
+        Label(main_window, text=(j_names[name_count][1])).grid(column=1,row=name_count+ROWS_ABOVE+1)
+        Label(main_window, text=(j_names[name_count][2])).grid(column=1,row=name_count+ROWS_ABOVE+1)
+        name_count +=1
+    counters['name_count'] = name_count
 
-# used to create an "append" button
-def append_name():
-    global hire_details, entry_full_name, entry_receipt_number, entry_item_hired, entry_number_hired, total_entries
-    hire_details.append([
-        entry_full_name.get(),
-        entry_receipt_number.get(),
-        entry_item_hired.get(),
-        entry_number_hired.get()
-    ])
+def append_details():
+    j_names.append([entry_full_name.get(), entry_receipt_number.get(), entry_item_hired.get(),entry_number_hired.get()])
     entry_full_name.delete(0,'end')
-    entry_receipt_number.delete(0,'end')
     entry_item_hired.delete(0,'end')
     entry_number_hired.delete(0,'end')
-    total_entries += 1
-    entry_print()  # automatically refresh display
+    entry_receipt_number.delete(0,'end')
+    counters['total_entries'] +=1
 
 # used to delete a specific row
 def delete_row():
-    global hire_details, total_entries, entry_row
-    try:
-        index = int(entry_row.get())
-        hire_details.pop(index)
-        total_entries -= 1
-        entry_row.delete(0,'end')
-        entry_print()
-    except:
-        pass
+    del j_names[int(delete_row.get())]
+    name_count = counters['name_count']
+    counters['total_entries'] -=1
+    delete_row.delete(0,'end')
+    Label(main_window, text="           ").grid(column=0,row=name_count+6)
+    Label(main_window, text="           ").grid(column=1,row=name_count+6)
+    Label(main_window, text="           ").grid(column=2,row=name_count+6)
+    Label(main_window, text="           ").grid(column=3,row=name_count+6)
+    print_names()
+
 
 # adds buttons and titles to the main window
 def setup_buttons():
@@ -70,23 +65,17 @@ def setup_buttons():
     entry_row = Entry(main_window)
     entry_row.grid(column=5, row=2, padx=5, pady=5)
     # buttons
-    Button(main_window, text="Append Details", command=append_name).grid(column=3, row=1)
+    Button(main_window, text="Append Details", command=append_details).grid(column=3, row=1)
     Button(main_window, text="Delete Row", command=delete_row).grid(column=6, row=2)
     Button(main_window, text="Quit", command=quit).grid(column=5, row=1)
     Button(main_window, text="Print Details", command=entry_print).grid(column=4, row=1)
-    # table headers
-    Label(main_window, font='bold', text="Row").grid(column=0, row=7)
-    Label(main_window, font='bold', text="Customer Name").grid(column=1, row=7)
-    Label(main_window, font='bold', text="Receipt Number").grid(column=2, row=7)
-    Label(main_window, font='bold', text="Item Hired").grid(column=3, row=7, padx=10)
-    Label(main_window, font='bold', text="Number Hired").grid(column=4, row=7, padx=15)
+j_names = []
+counters = {'total_entries':0,'name_count':0}
 # main function
-def main():
-    global main_window, hire_details, total_entries
-    hire_details = []
-    total_entries = 0
-    main_window = Tk()
-    setup_buttons()
-    main_window.mainloop()
-
+global main_window, hire_details, total_entries
+hire_details = []
+total_entries = 0
+main_window = Tk()
+main_window.mainloop()
+setup_buttons()
 main()

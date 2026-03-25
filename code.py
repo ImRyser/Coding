@@ -13,7 +13,9 @@ def entry_print():
         entry_full_name.get(),
         entry_receipt_number.get(),
         entry_item_hired.get(),
-        entry_number_hired.get()
+        entry_number_hired.get(),
+        entry_date_hired.get(),
+        entry_date_return.get(),
     ])
     total_entries += 1
 
@@ -29,6 +31,8 @@ def entry_print():
         Label(main_window, text=hire_details[i][1]).grid(column=2, row=i+8)
         Label(main_window, text=hire_details[i][2]).grid(column=3, row=i+8)
         Label(main_window, text=hire_details[i][3]).grid(column=4, row=i+8)
+        Label(main_window, text=hire_details[i][4]).grid(column=5, row=i+8)
+        Label(main_window, tetx=hire_details[i][5]).grid(column=6, row=i+8)
 
 # clear input fields
 def append_name():
@@ -36,6 +40,8 @@ def append_name():
     entry_receipt_number.delete(0, 'end')
     entry_item_hired.delete(0, 'end')
     entry_number_hired.delete(0, 'end')
+    entry_date_hired.delete(0,'end')
+    entry_date_return.delete(0,'end')
 
 # delete row
 def delete_row():
@@ -63,10 +69,19 @@ def refresh_display():
         Label(main_window, text=hire_details[i][1]).grid(column=2, row=i+8)
         Label(main_window, text=hire_details[i][2]).grid(column=3, row=i+8)
         Label(main_window, text=hire_details[i][3]).grid(column=4, row=i+8)
+        Label(main_window, text=hire_details[i][4]).grid(column=5, row=i+8)
+        Label(main_window, text=hire_details[i][5]).grid(column=6, row=i+8)
 
 # UI setup
 def setup_buttons():
-    global entry_full_name, entry_receipt_number, entry_item_hired, entry_number_hired, entry_row
+    global entry_full_name, entry_receipt_number, entry_item_hired, entry_number_hired, entry_row, entry_date_hired, entry_date_return
+    Label(main_window, text="Return Date").grid(column=0,row=7)
+    entry_date_return = Entry(main_window)
+    entry_date_return.grid(column=2,row=7)
+
+    Label(main_window, text="Date Hired").grid(column=0,row=6)
+    entry_date_hired = Entry(main_window)
+    entry_date_hired.grid(column=2,row=6)
 
     Label(main_window, text="Customer Name").grid(column=0, row=2)
     entry_full_name = Entry(main_window)

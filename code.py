@@ -19,20 +19,7 @@ def entry_print():
     ])
     total_entries += 1
 
-    # clear previous display
-    for widget in main_window.grid_slaves():
-        if int(widget.grid_info()["row"]) >= 8:
-            widget.destroy()
-
-    # display all entries
-    for i in range(total_entries):
-        Label(main_window, text=str(i)).grid(column=0, row=i+8)
-        Label(main_window, text=hire_details[i][0]).grid(column=1, row=i+8)
-        Label(main_window, text=hire_details[i][1]).grid(column=2, row=i+8)
-        Label(main_window, text=hire_details[i][2]).grid(column=3, row=i+8)
-        Label(main_window, text=hire_details[i][3]).grid(column=4, row=i+8)
-        Label(main_window, text=hire_details[i][4]).grid(column=5, row=i+8)
-        Label(main_window, tetx=hire_details[i][5]).grid(column=6, row=i+8)
+    refresh_display()  # use one display function
 
 # clear input fields
 def append_name():
@@ -64,17 +51,19 @@ def refresh_display():
             widget.destroy()
 
     for i in range(total_entries):
-        Label(main_window, text=str(i)).grid(column=0, row=i+8)
-        Label(main_window, text=hire_details[i][0]).grid(column=1, row=i+8)
-        Label(main_window, text=hire_details[i][1]).grid(column=2, row=i+8)
-        Label(main_window, text=hire_details[i][2]).grid(column=3, row=i+8)
-        Label(main_window, text=hire_details[i][3]).grid(column=4, row=i+8)
-        Label(main_window, text=hire_details[i][4]).grid(column=5, row=i+8)
-        Label(main_window, text=hire_details[i][5]).grid(column=6, row=i+8)
+        Label(main_window, text=str(i)).grid(column=0, row=i+9)
+        Label(main_window, text=hire_details[i][0]).grid(column=1, row=i+9)
+        Label(main_window, text=hire_details[i][1]).grid(column=2, row=i+9)
+        Label(main_window, text=hire_details[i][2]).grid(column=3, row=i+9)
+        Label(main_window, text=hire_details[i][3]).grid(column=4, row=i+9)
+        Label(main_window, text=hire_details[i][4]).grid(column=5, row=i+9)
+        Label(main_window, text=hire_details[i][5]).grid(column=6, row=i+9)
 
 # UI setup
 def setup_buttons():
-    global entry_full_name, entry_receipt_number, entry_item_hired, entry_number_hired, entry_row, entry_date_hired, entry_date_return
+    global entry_full_name, entry_receipt_number, entry_item_hired
+    global entry_number_hired, entry_row, entry_date_hired, entry_date_return
+
     Label(main_window, text="Return Date").grid(column=0,row=7)
     entry_date_return = Entry(main_window)
     entry_date_return.grid(column=2,row=7)
@@ -99,6 +88,7 @@ def setup_buttons():
     entry_number_hired = Entry(main_window)
     entry_number_hired.grid(column=2, row=5)
 
+    # side controls
     Label(main_window, text="Row ").grid(column=4, row=2)
     entry_row = Entry(main_window)
     entry_row.grid(column=5, row=2)
@@ -109,11 +99,13 @@ def setup_buttons():
     Button(main_window, text="Quit", command=quit_app).grid(column=5, row=1)
 
     # headers
-    Label(main_window, text="Row", font='bold').grid(column=0, row=7)
-    Label(main_window, text="Customer Name", font='bold').grid(column=1, row=7)
-    Label(main_window, text="Receipt Number", font='bold').grid(column=2, row=7)
-    Label(main_window, text="Item Hired", font='bold').grid(column=3, row=7)
-    Label(main_window, text="Number Hired", font='bold').grid(column=4, row=7)
+    Label(main_window, text="Row").grid(column=0, row=8)
+    Label(main_window, text="Customer Name").grid(column=1, row=8)
+    Label(main_window, text="Receipt Number").grid(column=2, row=8)
+    Label(main_window, text="Item Hired").grid(column=3, row=8)
+    Label(main_window, text="Number Hired").grid(column=4, row=8)
+    Label(main_window, text="Date Hired").grid(column=5, row=8)
+    Label(main_window, text="Return Date").grid(column=6, row=8)
 
 # main
 def main():

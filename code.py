@@ -1,11 +1,11 @@
 from tkinter import *
 from tkinter import messagebox  
 
-# quit button
+# creates the quit button which lets the user close the program
 def quit_app():
     main_window.destroy()
 
-# print stored data
+# this creates the print button which lets the user print their inputs
 def entry_print():
     refresh_display()
 
@@ -14,6 +14,7 @@ def append_name():
     global hire_details, total_entries
 
     # -------- VALIDATION -------- #
+    #validation makes sure the user types the appropriate input, whether it's only allowed to user numbers or letters
 
     # Customer Name (no numbers allowed)
     name = entry_full_name.get().strip()
@@ -23,7 +24,7 @@ def append_name():
     if any(char.isdigit() for char in name):
         messagebox.showerror("Error", "Customer Name cannot contain numbers")
         return
-
+    
     # Receipt Number (must be number)
     if not entry_receipt_number.get().isdigit():
         messagebox.showerror("Error", "Receipt Number must be a number")
@@ -34,6 +35,7 @@ def append_name():
     if item == "":
         messagebox.showerror("Error", "Item Hired is required")
         return
+    
     if any(char.isdigit() for char in item):
         messagebox.showerror("Error", "Item Hired cannot contain numbers")
         return
@@ -69,7 +71,7 @@ def append_name():
     ])
     total_entries += 1
 
-    # clear input fields
+    # clears what the user has written in the labels
     entry_full_name.delete(0, 'end')
     entry_receipt_number.delete(0, 'end')
     entry_item_hired.delete(0, 'end')
@@ -77,7 +79,7 @@ def append_name():
     entry_date_hired.delete(0, 'end')
     entry_date_return.delete(0, 'end')
 
-# delete row
+# allows user to delete rows
 def delete_row():
     global hire_details, total_entries
 
@@ -110,12 +112,12 @@ def refresh_display():
         Label(main_window, text=hire_details[i][4]).grid(column=5, row=i+9)
         Label(main_window, text=hire_details[i][5]).grid(column=6, row=i+9)
 
-# UI setup
+# Sets up the UI
 def setup_buttons():
     global entry_full_name, entry_receipt_number, entry_item_hired
     global entry_number_hired, entry_row, entry_date_hired, entry_date_return
 
-    # Input fields
+    # These lavels are where the user inputs there data
     Label(main_window, text="Customer Name").grid(column=0, row=2)
     entry_full_name = Entry(main_window)
     entry_full_name.grid(column=2, row=2)
@@ -140,18 +142,18 @@ def setup_buttons():
     entry_date_return = Entry(main_window)
     entry_date_return.grid(column=2, row=7)
 
-    # row delete input
+    # creates a non required label which lets the user delete specific rows
     Label(main_window, text="Row").grid(column=4, row=2)
     entry_row = Entry(main_window)
     entry_row.grid(column=5, row=2)
 
-    # buttons
+    # these create buttons that the user can click to perform certain actions
     Button(main_window, text="Append Details", command=append_name).grid(column=3, row=1)
     Button(main_window, text="Print", command=entry_print).grid(column=4, row=1)
     Button(main_window, text="Delete Row", command=delete_row).grid(column=6, row=2)
     Button(main_window, text="Quit", command=quit_app).grid(column=5, row=1)
 
-    # table headers
+    # these create headers where the data is stored
     Label(main_window, text="Row").grid(column=0, row=8)
     Label(main_window, text="Customer Name").grid(column=1, row=8)
     Label(main_window, text="Receipt Number").grid(column=2, row=8)

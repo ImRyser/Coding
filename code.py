@@ -1,11 +1,12 @@
+# lets us use tkinter and error messages
 from tkinter import *
 from tkinter import messagebox  
 
-# creates the quit button which lets the user close the program
+# creates the quit function which lets the user close the program when clicking the "quit" button
 def quit_app():
     main_window.destroy()
 
-# this creates the print button which lets the user print their inputs
+# this creates the print function which makes the print button work by letting users print their inputs
 def entry_print():
     refresh_display()
 
@@ -14,8 +15,8 @@ def append_name():
     global hire_details, total_entries
 
     # -------- VALIDATION -------- #
-    #validation makes sure the user types the appropriate input, whether it's only allowed to user numbers or letters
-
+    # if statements are used to make sure the user types the appropriate input, for example if their only allowed to use numbers or letters in certain labels
+     
     # Customer Name (no numbers allowed)
     name = entry_full_name.get().strip()
     if name == "":
@@ -60,7 +61,8 @@ def append_name():
         messagebox.showerror("Error", "Return Date is required")
         return
 
-    # -------- STORE DATA -------- #
+    # -------- DATA STORAGE -------- #
+    # this is where data is stored when the user inputs their data
     hire_details.append([
         name,
         entry_receipt_number.get(),
@@ -95,9 +97,9 @@ def delete_row():
     except ValueError:
         messagebox.showerror("Error", "Row must be a number")
 
-# refresh table display
+# refreshes table display
 def refresh_display():
-    # clear old table
+    # clears old table
     for widget in main_window.grid_slaves():
         if int(widget.grid_info()["row"]) >= 9:
             widget.destroy()
@@ -112,12 +114,12 @@ def refresh_display():
         Label(main_window, text=hire_details[i][4]).grid(column=5, row=i+9)
         Label(main_window, text=hire_details[i][5]).grid(column=6, row=i+9)
 
-# Sets up the UI
+# Creates UI and makes buttons and labels function/appear.
 def setup_buttons():
     global entry_full_name, entry_receipt_number, entry_item_hired
     global entry_number_hired, entry_row, entry_date_hired, entry_date_return
-
-    # These lavels are where the user inputs there data
+    
+    # these labels are where the user inputs their data
     Label(main_window, text="Customer Name").grid(column=0, row=2)
     entry_full_name = Entry(main_window)
     entry_full_name.grid(column=2, row=2)
@@ -142,7 +144,7 @@ def setup_buttons():
     entry_date_return = Entry(main_window)
     entry_date_return.grid(column=2, row=7)
 
-    # creates a non required label which lets the user delete specific rows
+    # creates a non required label which lets the user delete rows depending on the number they type
     Label(main_window, text="Row").grid(column=4, row=2)
     entry_row = Entry(main_window)
     entry_row.grid(column=5, row=2)
@@ -162,7 +164,7 @@ def setup_buttons():
     Label(main_window, text="Date Hired").grid(column=5, row=8)
     Label(main_window, text="Return Date").grid(column=6, row=8)
 
-# main
+# main, this is how the main window is created which allows for buttons and labels to appear on the program
 def main():
     global main_window, hire_details, total_entries
     hire_details = []

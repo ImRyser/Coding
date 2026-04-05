@@ -10,14 +10,14 @@ def quit_app():
 def entry_print():
     refresh_display()
 
-# append (store data)
+# creates the print function which lets the user store their data to be printed
 def append_name():
     global hire_details, total_entries
 
     # -------- VALIDATION -------- #
     # if statements are used to make sure the user types the appropriate input, for example if their only allowed to use numbers or letters in certain labels
      
-    # Customer Name (no numbers allowed)
+    # Customer Name: if user types nothing than an error message pops up, or if user types numbers instead of letters an error message pops up
     name = entry_full_name.get().strip()
     if name == "":
         messagebox.showerror("Error", "Customer Name is required")
@@ -26,22 +26,22 @@ def append_name():
         messagebox.showerror("Error", "Customer Name cannot contain numbers")
         return
     
-    # Receipt Number (must be number)
+    # Receipt Number: user must type numbers or they get an error message
     if not entry_receipt_number.get().isdigit():
         messagebox.showerror("Error", "Receipt Number must be a number")
         return
 
-    # Item Hired (no numbers allowed)
+    # Item Hired: if user types nothing an error message pops up
     item = entry_item_hired.get().strip()
     if item == "":
         messagebox.showerror("Error", "Item Hired is required")
         return
-    
+    #if user types numbers than an error message pops up
     if any(char.isdigit() for char in item):
         messagebox.showerror("Error", "Item Hired cannot contain numbers")
         return
 
-    # Number Hired
+    # Number Hired: if user types a number lower than 1 or higher than 500 an error message pops up, or if user types letters instead of numbers an error message pops up
     try:
         num_hired = int(entry_number_hired.get())
         if not (1 <= num_hired <= 500):
@@ -51,12 +51,12 @@ def append_name():
         messagebox.showerror("Error", "Number Hired must be a number")
         return
 
-    # Date Hired
+    # Date Hired: if user types nothing than an error message pops up
     if entry_date_hired.get().strip() == "":
         messagebox.showerror("Error", "Date Hired is required")
         return
 
-    # Return Date
+    # Return Date: if user types nothing than an error message pops up
     if entry_date_return.get().strip() == "":
         messagebox.showerror("Error", "Return Date is required")
         return
@@ -120,26 +120,27 @@ def setup_buttons():
     global entry_number_hired, entry_row, entry_date_hired, entry_date_return
     
     # these labels are where the user inputs their data
+    #creates the "Customer Name" label
     Label(main_window, text="Customer Name").grid(column=0, row=2)
     entry_full_name = Entry(main_window)
     entry_full_name.grid(column=2, row=2)
-
+    #creates the "Receipt Number" label
     Label(main_window, text="Receipt Number").grid(column=0, row=3)
     entry_receipt_number = Entry(main_window)
     entry_receipt_number.grid(column=2, row=3)
-
+    #creates the "Item Hired" label
     Label(main_window, text="Item Hired").grid(column=0, row=4)
     entry_item_hired = Entry(main_window)
     entry_item_hired.grid(column=2, row=4)
-
+    #creates the "Number Hired" label
     Label(main_window, text="Number Hired").grid(column=0, row=5)
     entry_number_hired = Entry(main_window)
     entry_number_hired.grid(column=2, row=5)
-
+    #Creates the "Date Hired" label
     Label(main_window, text="Date Hired").grid(column=0, row=6)
     entry_date_hired = Entry(main_window)
     entry_date_hired.grid(column=2, row=6)
-
+    #Creates the "Return Date" label
     Label(main_window, text="Return Date").grid(column=0, row=7)
     entry_date_return = Entry(main_window)
     entry_date_return.grid(column=2, row=7)
@@ -164,7 +165,7 @@ def setup_buttons():
     Label(main_window, text="Date Hired").grid(column=5, row=8)
     Label(main_window, text="Return Date").grid(column=6, row=8)
 
-# main, this is how the main window is created which allows for buttons and labels to appear on the program
+# this is how the main window is created which allows for buttons and labels to appear on the program
 def main():
     global main_window, hire_details, total_entries
     hire_details = []
